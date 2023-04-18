@@ -11,8 +11,9 @@ app.set('view engine','jade');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'routes')));
-app.use('/', rootHandler);
-app.use('/hello/:name', helloHandler);
+
+app.get('/', rootHandler);
+app.get('/hello/:name', helloHandler);
 
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);

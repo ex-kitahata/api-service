@@ -13,8 +13,8 @@ app.set('view engine', 'jade');
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.static(path.join(__dirname, 'routes')));
-app.use('/', handlers_js_1.rootHandler);
-app.use('/hello/:name', handlers_js_1.helloHandler);
+app.get('/', handlers_js_1.rootHandler);
+app.get('/hello/:name', handlers_js_1.helloHandler);
 app.listen(port, function () {
     return console.log("Server is listening on ".concat(port));
 });
