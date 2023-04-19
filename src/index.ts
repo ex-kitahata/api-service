@@ -1,6 +1,6 @@
 import express from 'express';
 import { rootHandler, helloHandler } from './routes/handlers.js';
-import { jsonRouter } from './routes/jsonRouter.js';
+import { movieRouter, moviesRouter } from './routes/index.js';
 const path = require('path');
 
 const app = express();
@@ -10,10 +10,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','jade');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/hello/:name', helloHandler);
-app.use('/:name/:id', jsonRouter);
+app.use('/movies/:id', movieRouter);
+app.use('/movies', moviesRouter);
 app.use('/', rootHandler);
 
 app.listen(port, () => {
