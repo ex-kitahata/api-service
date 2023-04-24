@@ -20,11 +20,7 @@ app.use('/movies', moviesRouter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post('/test', (req, res) => {
-  console.log(req.body);
-  res.send("Received POST Data!");
-});
-//addData, moviesRouter);
+app.post('/test', addData, moviesRouter);
 
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);

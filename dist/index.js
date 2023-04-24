@@ -21,11 +21,7 @@ app.use('/movies', index_js_1.moviesRouter);
 // app.use('/', rootHandler);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.post('/test', function (req, res) {
-    console.log(req.body);
-    res.send("Received POST Data!");
-});
-//addData, moviesRouter);
+app.post('/test', index_js_1.addData, index_js_1.moviesRouter);
 app.listen(port, function () {
     return console.log("Server is listening on ".concat(port));
 });
