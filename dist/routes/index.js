@@ -17,7 +17,7 @@ var movieRouter = function (req, res) {
 exports.movieRouter = movieRouter;
 var addData = function (req, res, next) {
     var body = req.body;
-    console.log("\u65B0\u898F\u8FFD\u52A0\n".concat(req.body));
+    console.log("新規追加");
     db_json_1.default.movies.push(body);
     next();
 };

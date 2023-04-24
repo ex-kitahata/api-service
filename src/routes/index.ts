@@ -13,7 +13,7 @@ export const movieRouter = (req: Request, res: Response) => {
 
 export const addData = function(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
-    console.log(`新規追加\n${req.body}`);
+    console.log("新規追加");
     movies.movies.push(body);
     next();
 };

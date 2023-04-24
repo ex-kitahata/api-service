@@ -17,7 +17,11 @@ app.use('/movies/:id', movieRouter);
 app.use('/movies', moviesRouter);
 app.use('/', rootHandler);
 
-app.post('/movies', addData, moviesRouter);
+app.post('/test', (req, res) => {
+  console.log(req.body);
+  res.send("Received POST Data!");
+});
+//addData, moviesRouter);
 
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);
