@@ -15,7 +15,7 @@ var movieRouter = function (req, res) {
     return res.send(db_json_1.default.movies.find(function (v) { return v.id == id; }));
 };
 exports.movieRouter = movieRouter;
-var addData = function (req, res) {
+var addData = function (req, res, next) {
     var body = req.body;
     var movie = db_json_1.default.movies.find(function (v) { return v.id == body.id; });
     if (movie != null) {
@@ -23,10 +23,12 @@ var addData = function (req, res) {
         movie.name = body.name;
         movie.director = body.director;
         movie.rating = body.rating;
-        return res.send(db_json_1.default.movies.find(function (v) { return v.id == body.id; }));
+        console.log("\u66F4\u65B0\n".concat(req.body));
+        next();
     }
+    console.log("\u65B0\u898F\u8FFD\u52A0\n".concat(req.body));
     db_json_1.default.movies.push(body);
-    return res.send(JSON.stringify(db_json_1.default.movies, null, 10));
+    next();
 };
 exports.addData = addData;
 //# sourceMappingURL=index.js.map

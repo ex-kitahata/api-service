@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import movies from "../db/db.json";
 
 export const moviesRouter = (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ export const movieRouter = (req: Request, res: Response) => {
     return res.send(movies.movies.find((v)=>v.id==id));
 };
 
-export const addData = (req: Request, res: Response) => {
+export const addData = function(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
     var movie =  movies.movies.find((v)=>v.id == body.id)
     if(movie != null)
@@ -20,9 +20,12 @@ export const addData = (req: Request, res: Response) => {
         movie.name = body.name;
         movie.director = body.director;
         movie.rating = <number>body.rating;
-        return res.send(movies.movies.find((v)=>v.id == body.id));
+        console.log(`更新\n${req.body}`);
+        next();
     }
 
+    console.log(`新規追加\n${req.body}`);
+
     movies.movies.push(body);
-    return res.send(JSON.stringify(movies.movies, null, 10));
+    next();
 };

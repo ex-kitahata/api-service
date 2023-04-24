@@ -18,7 +18,7 @@ app.use('/hello/:name', handlers_js_1.helloHandler);
 app.use('/movies/:id', index_js_1.movieRouter);
 app.use('/movies', index_js_1.moviesRouter);
 app.use('/', handlers_js_1.rootHandler);
-app.post('/movies', index_js_1.addData);
+app.post('/movies', index_js_1.addData, index_js_1.moviesRouter);
 app.listen(port, function () {
     return console.log("Server is listening on ".concat(port));
 });
