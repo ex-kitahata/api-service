@@ -12,19 +12,17 @@ export const movieRouter = (req: Request, res: Response) => {
 };
 
 export const addData = (req: Request, res: Response) => {
-    const { params } = req;
-    const { id = 0, name = "name", director = "director", rating = 0} = params;
-    var movie =  movies.movies.find((v)=>v.id==id)
+    const { body } = req;
+    var movie =  movies.movies.find((v)=>v.id == body.id)
     if(movie != null)
     {
-        movie.id = <number>id;
-        movie.name = name;
-        movie.director = director;
-        movie.rating = <number>rating;
-        return res.send(movies.movies.find((v)=>v.id==id));
+        movie.id = <number>body.id;
+        movie.name = body.name;
+        movie.director = body.director;
+        movie.rating = <number>body.rating;
+        return res.send(movies.movies.find((v)=>v.id == body.id));
     }
 
-    const jsonData = { id: <number>id, "name": name, "director": director, "rating":  <number>rating };
-    movies.movies.push(jsonData);
-    return res.send(movies.movies.find((v)=>v.id==id));
+    movies.movies.push(body);
+    return res.send(JSON.stringify(movies.movies, null, 10));
 };

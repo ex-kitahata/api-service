@@ -15,10 +15,10 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static(path.join(__dirname, 'public')));
 app.use('/hello/:name', handlers_js_1.helloHandler);
-app.use('/movies/:id/:name/:director/:rating', index_js_1.addData);
 app.use('/movies/:id', index_js_1.movieRouter);
 app.use('/movies', index_js_1.moviesRouter);
 app.use('/', handlers_js_1.rootHandler);
+app.post('/movies', index_js_1.addData);
 app.listen(port, function () {
     return console.log("Server is listening on ".concat(port));
 });
