@@ -18,7 +18,10 @@ export const addData = function(req: Request, res: Response, next: NextFunction)
         movies.movies.push(body);
     }
     else {
-        movie = JSON.parse(body);
+        movie.id = <number>body.id;
+        movie.name = body.name;
+        movie.director = body.director;
+        movie.rating = <number>body.rating;
      }
     next();
 };
