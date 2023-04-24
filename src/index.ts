@@ -1,6 +1,7 @@
 import express from 'express';
 import { rootHandler, helloHandler } from './routes/handlers.js';
 import { addData, movieRouter, moviesRouter } from './routes/index.js';
+import bodyParser, { BodyParser } from 'body-parser';
 const path = require('path');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use('/movies/:id', movieRouter);
 app.use('/movies', moviesRouter);
 app.use('/', rootHandler);
 
+app.use(bodyParser.json());
 app.post('/test', (req, res) => {
   console.log(req.body);
   res.send("Received POST Data!");
