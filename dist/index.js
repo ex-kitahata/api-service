@@ -16,12 +16,12 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static(path.join(__dirname, 'public')));
 app.use('/hello/:name', handlers_js_1.helloHandler);
-app.use('/movies/:id', index_js_1.movieRouter);
-app.use('/movies', index_js_1.moviesRouter);
-// app.use('/', rootHandler);
+app.get('/movies/:id', index_js_1.movieRouter);
+app.get('/movies', index_js_1.moviesRouter);
+app.get('/', handlers_js_1.rootHandler);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.post('/test', index_js_1.addData, index_js_1.moviesRouter);
+app.post('/movies', index_js_1.addData, index_js_1.moviesRouter);
 app.listen(port, function () {
     return console.log("Server is listening on ".concat(port));
 });

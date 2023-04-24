@@ -14,13 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/hello/:name', helloHandler);
-app.use('/movies/:id', movieRouter);
-app.use('/movies', moviesRouter);
-// app.use('/', rootHandler);
+app.get('/movies/:id', movieRouter);
+app.get('/movies', moviesRouter);
+app.get('/', rootHandler);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post('/test', addData, moviesRouter);
+app.post('/movies', addData, moviesRouter);
 
 app.listen(port, () => {
   return console.log(`Server is listening on ${port}`);
