@@ -17,8 +17,13 @@ var movieRouter = function (req, res) {
 exports.movieRouter = movieRouter;
 var addData = function (req, res, next) {
     var body = req.body;
-    console.log("新規追加");
-    db_json_1.default.movies.push(body);
+    var movie = db_json_1.default.movies.find(function (v) { return v.id == body.id; });
+    if (movie == null) {
+        db_json_1.default.movies.push(body);
+    }
+    else {
+        movie = body;
+    }
     next();
 };
 exports.addData = addData;

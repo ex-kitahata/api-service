@@ -13,7 +13,12 @@ export const movieRouter = (req: Request, res: Response) => {
 
 export const addData = function(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
-    console.log("新規追加");
-    movies.movies.push(body);
+    var movie = movies.movies.find(v => v.id == body.id);
+    if(movie == null){
+        movies.movies.push(body);
+    }
+    else {
+        movie = body;
+     }
     next();
 };
