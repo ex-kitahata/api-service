@@ -18,7 +18,7 @@ export const addData = function(req: Request, res: Response, next: NextFunction)
         movies.movies.push(body);
     }
     else {
-        movie = body;
+        movie = JSON.parse(body);
      }
     next();
 };

@@ -22,7 +22,7 @@ var addData = function (req, res, next) {
         db_json_1.default.movies.push(body);
     }
     else {
-        movie = body;
+        movie = JSON.parse(body);
     }
     next();
 };
