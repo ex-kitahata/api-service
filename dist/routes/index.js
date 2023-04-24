@@ -17,15 +17,6 @@ var movieRouter = function (req, res) {
 exports.movieRouter = movieRouter;
 var addData = function (req, res, next) {
     var body = req.body;
-    var movie = db_json_1.default.movies.find(function (v) { return v.id == body.id; });
-    if (movie != null) {
-        movie.id = body.id;
-        movie.name = body.name;
-        movie.director = body.director;
-        movie.rating = body.rating;
-        console.log("\u66F4\u65B0\n".concat(req.body));
-        next();
-    }
     console.log("\u65B0\u898F\u8FFD\u52A0\n".concat(req.body));
     db_json_1.default.movies.push(body);
     next();
