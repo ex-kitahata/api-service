@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div>
+        <%= contents %>
+    </div>
+    <form>
+        <div>
+            <label>IDを入力してください</label>
+            <input type="number" id="id" min="0">
+        </div>
+        <div>
+            <label>名前を入力してください</label>
+            <input type="text" id="nameText">
+        </div>
+        <div>
+            <label>監督名を入力してください</label>
+            <input type="text" id="directorText">
+        </div>
+        <div>
+            <label>評価を入力してください</label>
+            <input type="number" id="rating" min="0">
+        </div>
+        <input type="button" value="追加" onclick="addData">
+    </form>
+    <p id="msg"></p>
+    <script>
+        function addData(){
+            if(id.value==""||nameText.value==""||directorText.value==""||rating.value==""){
+                msg.innerText ="未入力の欄があります。";
+            }else{
+                // let data = {id:id.value, name:nameText.value, director:directorText.value, rating:rating.value}
+                msg.innerText ="追加しました。";
+            }
+        }
+    </script>
+</body>
+</html>

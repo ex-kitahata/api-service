@@ -3,7 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.helloHandler = exports.rootHandler = void 0;
 var helloBuilder = function (name) { return ({ hello: name }); };
 var rootHandler = function (_req, res) {
-    return res.render('index', { title: 'Hello, Your API is working!!' });
+    var data = {
+        "title": 'Hello, Your API is working!!',
+        "contents": 'Hello, Your API is working!!'
+    };
+    return res.render("index.ejs", data);
 };
 exports.rootHandler = rootHandler;
 var helloHandler = function (req, res) {

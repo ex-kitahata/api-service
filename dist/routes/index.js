@@ -3,31 +3,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addData = exports.movieRouter = exports.moviesRouter = void 0;
+exports.refreshData = exports.addData = exports.movieRouter = exports.moviesRouter = void 0;
 var db_json_1 = __importDefault(require("../db/db.json"));
+var title = "TypeScript Api";
 var moviesRouter = function (req, res) {
-    return res.send(JSON.stringify(db_json_1.default.movies, null, 10));
+    var data = {
+        "title": title,
+        "contents": JSON.stringify(db_json_1.default.movies, null, 10),
+    };
+    return res.render("movies.ejs", data);
 };
 exports.moviesRouter = moviesRouter;
 var movieRouter = function (req, res) {
     var params = req.params;
     var _a = params.id, id = _a === void 0 ? 0 : _a;
-    return res.send(db_json_1.default.movies.find(function (v) { return v.id == id; }));
+    var data = {
+        "title": title,
+        "contents": JSON.stringify(db_json_1.default.movies.find(function (v) { return v.id == id; }), null, 10)
+    };
+    return res.render("index.ejs", data);
 };
 exports.movieRouter = movieRouter;
 var addData = function (req, res, next) {
     var body = req.body;
-    var movie = db_json_1.default.movies.find(function (v) { return v.id == body.id; });
-    if (movie == null) {
-        db_json_1.default.movies.push(body);
-    }
-    else {
-        movie.id = body.id;
-        movie.name = body.name;
-        movie.director = body.director;
-        movie.rating = body.rating;
-    }
+    (0, exports.refreshData)(body);
     next();
 };
 exports.addData = addData;
+var refreshData = function (data) {
+    var movie = db_json_1.default.movies.find(function (v) { return v.id == data.id; });
+    if (movie == null) {
+        db_json_1.default.movies.push(data);
+    }
+    else {
+        movie.id = data.id;
+        movie.name = data.name;
+        movie.director = data.director;
+        movie.rating = data.rating;
+    }
+};
+exports.refreshData = refreshData;
 //# sourceMappingURL=index.js.map

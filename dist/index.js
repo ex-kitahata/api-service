@@ -11,7 +11,7 @@ var path = require('path');
 var app = (0, express_1.default)();
 var port = process.env.PORT || '8000';
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static(path.join(__dirname, 'public')));
