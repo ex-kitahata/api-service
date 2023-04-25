@@ -12,7 +12,7 @@ export const rootHandler = (_req: Request, res: Response) => {
   let data = {
     "title": 'Hello, Your API is working!!',
     "contents": 'Hello, Your API is working!!'
-}
+  }
   return res.render("index.ejs", data);
 };
 

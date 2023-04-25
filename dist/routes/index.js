@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.refreshData = exports.addData = exports.movieRouter = exports.moviesRouter = void 0;
+exports.addData = exports.movieRouter = exports.moviesRouter = void 0;
 var db_json_1 = __importDefault(require("../db/db.json"));
 var title = "TypeScript Api";
 var moviesRouter = function (req, res) {
@@ -26,21 +26,17 @@ var movieRouter = function (req, res) {
 exports.movieRouter = movieRouter;
 var addData = function (req, res, next) {
     var body = req.body;
-    (0, exports.refreshData)(body);
+    var movie = db_json_1.default.movies.find(function (v) { return v.id == body.id; });
+    if (movie == null) {
+        db_json_1.default.movies.push(body);
+    }
+    else {
+        movie.id = body.id;
+        movie.name = body.name;
+        movie.director = body.director;
+        movie.rating = body.rating;
+    }
     next();
 };
 exports.addData = addData;
-var refreshData = function (data) {
-    var movie = db_json_1.default.movies.find(function (v) { return v.id == data.id; });
-    if (movie == null) {
-        db_json_1.default.movies.push(data);
-    }
-    else {
-        movie.id = data.id;
-        movie.name = data.name;
-        movie.director = data.director;
-        movie.rating = data.rating;
-    }
-};
-exports.refreshData = refreshData;
 //# sourceMappingURL=index.js.map

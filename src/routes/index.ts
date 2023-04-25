@@ -21,21 +21,16 @@ export const movieRouter = (req: Request, res: Response) => {
     return res.render("index.ejs", data);
 };
 
-export const addData = function(req: Request, res: Response, next: NextFunction) {
+export const addData = function (req: Request, res: Response, next: NextFunction) {
     const { body } = req;
-    refreshData(body);
-    next();
-};
-
-export const refreshData = function(data: {id:number, name:string, director:string, rating:number}){
-    var movie = movies.movies.find(v => v.id == data.id);
-    if(movie == null){
-        movies.movies.push(data);
+    var movie = movies.movies.find(v => v.id == body.id);
+    if (movie == null) {
+        movies.movies.push(body);
+    } else {
+        movie.id = <number>body.id;
+        movie.name = body.name;
+        movie.director = body.director;
+        movie.rating = <number>body.rating;
     }
-    else {
-        movie.id = <number>data.id;
-        movie.name = data.name;
-        movie.director = data.director;
-        movie.rating = <number>data.rating;
-     }
+    next();
 };
