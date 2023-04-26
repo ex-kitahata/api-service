@@ -5,24 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addData = exports.movieRouter = exports.moviesRouter = void 0;
 var db_json_1 = __importDefault(require("../db/db.json"));
-var fs_1 = __importDefault(require("fs"));
 var moviesRouter = function (req, res) {
     var query = req.query;
-    if (query.id != null && query.name != null && query.director != null && query.rating != null) {
-        var data_1 = { id: Number.parseInt(query.id), name: query.name, director: query.director, rating: Number.parseFloat(query.rating) };
-        var movie = db_json_1.default.movies.find(function (v) { return v.id == data_1.id; });
-        if (movie == null) {
-            pushData(data_1);
-        }
-        else {
-            refreshData(data_1);
-        }
-        fs_1.default.writeFile('db.json', JSON.stringify(db_json_1.default.movies, null, '    '), function (err) {
-            if (err)
-                console.log('error', err);
-        });
-    }
-    else if (query.id != null) {
+    if (query.id != null) {
         return res.send(JSON.stringify(db_json_1.default.movies.find(function (v) { return v.id == Number.parseInt(query.id); }), null, '    '));
     }
     return res.send(JSON.stringify(db_json_1.default.movies, null, '    '));

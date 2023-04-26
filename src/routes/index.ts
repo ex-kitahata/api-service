@@ -4,19 +4,7 @@ import fs from 'fs';
 
 export const moviesRouter = (req: Request, res: Response) => {
     const { query } = req;
-    if (query.id != null && query.name != null && query.director != null && query.rating != null) {
-        let data = { id: Number.parseInt(<string>query.id), name: query.name, director: query.director, rating: Number.parseFloat(<string>query.rating) };
-        var movie = movies.movies.find(v => v.id == data.id);
-        if (movie == null) {
-            pushData(data);
-        } else {
-            refreshData(data);
-        }
-        fs.writeFile('db.json', JSON.stringify(movies.movies, null, '    '), (err) => {
-            if (err) console.log('error', err);
-        });
-    }
-    else if (query.id != null) {
+    if (query.id != null) {
         return res.send(JSON.stringify(movies.movies.find((v) => v.id == Number.parseInt(<string>query.id)), null, '    '));
     }
     return res.send(JSON.stringify(movies.movies, null, '    '));
