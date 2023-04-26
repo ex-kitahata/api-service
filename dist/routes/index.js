@@ -22,7 +22,10 @@ var moviesRouter = function (req, res) {
                 console.log('error', err);
         });
     }
-    return res.send(JSON.stringify(db_json_1.default.movies, null, 10));
+    else if (query.id != null) {
+        return res.send(JSON.stringify(db_json_1.default.movies.find(function (v) { return v.id == Number.parseInt(query.id); }), null, '    '));
+    }
+    return res.send(JSON.stringify(db_json_1.default.movies, null, '    '));
 };
 exports.moviesRouter = moviesRouter;
 var movieRouter = function (req, res) {

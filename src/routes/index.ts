@@ -16,7 +16,10 @@ export const moviesRouter = (req: Request, res: Response) => {
             if (err) console.log('error', err);
         });
     }
-    return res.send(JSON.stringify(movies.movies, null, 10));
+    else if (query.id != null) {
+        return res.send(JSON.stringify(movies.movies.find((v) => v.id == Number.parseInt(<string>query.id)), null, '    '));
+    }
+    return res.send(JSON.stringify(movies.movies, null, '    '));
 };
 
 export const movieRouter = (req: Request, res: Response) => {
