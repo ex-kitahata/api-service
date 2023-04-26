@@ -24,20 +24,30 @@
         </div>
         <div>
             <label>評価を入力してください</label>
-            <input type="number" id="rating" min="0">
+            <input type="number" id="rating" min="0" max="10.0">
         </div>
         <input type="button" value="追加" onclick="addData()">
     </form>
     <p id="msg"></p>
     <script>
+        const url = location.href + "movies";
+        let id = document.getElementById("id");
+        let nameText = document.getElementById("nameText");
+        let directorText = document.getElementById("directorText");
+        let rating = document.getElementById("rating");
+
         function addData() {
             if (id.value == "" || nameText.value == "" || directorText.value == "" || rating.value == "") {
                 msg.innerText = "未入力の欄があります。";
             } else {
-                let data = { id: id.value, name: nameText.value, director: directorText.value, rating: rating.value };
-                fetch("https://api-service-production-406a.up.railway.app/movies", {
+                let data = { "id": Number.parseInt(id.value), "name": nameText.value, "director": directorText.value, "rating": Number.parseFloat(rating.value) };
+                let dataString = JSON.stringify(data);
+                fetch(url, {
                     method: "POST",
-                    body: JSON.stringify(data)
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: dataString
                 });
                 msg.innerText = "追加しました。";
             }
