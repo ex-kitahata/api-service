@@ -16,7 +16,6 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static(path.join(__dirname, 'public')));
 app.use('/hello/:name', handlers_js_1.helloHandler);
-app.get('/movies/:id', index_js_1.movieRouter);
 app.get('/movies', index_js_1.moviesRouter);
 app.get('/', handlers_js_1.rootHandler);
 app.use(body_parser_1.default.json());
