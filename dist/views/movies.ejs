@@ -57,11 +57,25 @@
         }
 
         async function findData() {
-            var response = await fetch(url + `?id=${id.value}`, {
-                method: "GET"
-            });
+            if (id.value == "") {
+                var response = await fetch(url, {
+                    method: "GET"
+                });
+                const jsonData = await response.json();
+                let text = JSON.stringify(jsonData[0]);
+                for (var i = 1; i < jsonData.length; i++) {
+                    text = text + `\n${JSON.stringify(jsonData[i])}`;
+                }
+                msg.innerText = text;
+                return;
+            }
 
+            var response = await fetch(url + `?id=${id.value}`, { method: "GET" });
             const jsonData = await response.json();
+            if (JSON.stringify(jsonData) == "{}") {
+                msg.innerText = `id:${id.value}のデータは存在しません`;
+                return;
+            }
             msg.innerText = JSON.stringify(jsonData);
         }
     </script>
