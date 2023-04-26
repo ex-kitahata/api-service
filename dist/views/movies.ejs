@@ -9,9 +9,6 @@
 </head>
 
 <body>
-    <div>
-        <%= contents %>
-    </div>
     <form>
         <div>
             <label>IDを入力してください</label>
@@ -37,8 +34,11 @@
             if (id.value == "" || nameText.value == "" || directorText.value == "" || rating.value == "") {
                 msg.innerText = "未入力の欄があります。";
             } else {
-                // このDataをdb.jsonに追加したい
                 let data = { id: id.value, name: nameText.value, director: directorText.value, rating: rating.value };
+                fetch("https://api-service-production-406a.up.railway.app/", {
+                    method: "POST",
+                    body: JSON.stringify(data)
+                });
                 msg.innerText = "追加しました。";
             }
         }

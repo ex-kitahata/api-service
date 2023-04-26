@@ -10,10 +10,9 @@ const helloBuilder: HelloBuilder = name => ({ hello: name });
 
 export const rootHandler = (_req: Request, res: Response) => {
   let data = {
-    "title": 'Hello, Your API is working!!',
-    "contents": 'Hello, Your API is working!!'
+    "title": 'Api Service'
   }
-  return res.render("index.ejs", data);
+  return res.render("movies.ejs", data);
 };
 
 export const helloHandler = (req: Request, res: Response) => {

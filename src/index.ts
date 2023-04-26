@@ -1,6 +1,6 @@
 import express from 'express';
 import { rootHandler, helloHandler } from './routes/handlers.js';
-import { addData, movieRouter, moviesRouter } from './routes/index.js';
+import { addData, moviesRouter } from './routes/index.js';
 import bodyParser from 'body-parser';
 const path = require('path');
 

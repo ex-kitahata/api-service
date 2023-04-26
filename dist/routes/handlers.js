@@ -4,10 +4,9 @@ exports.helloHandler = exports.rootHandler = void 0;
 var helloBuilder = function (name) { return ({ hello: name }); };
 var rootHandler = function (_req, res) {
     var data = {
-        "title": 'Hello, Your API is working!!',
-        "contents": 'Hello, Your API is working!!'
+        "title": 'Api Service'
     };
-    return res.render("index.ejs", data);
+    return res.render("movies.ejs", data);
 };
 exports.rootHandler = rootHandler;
 var helloHandler = function (req, res) {
